@@ -203,7 +203,7 @@ begin
   if (tg_op = 'INSERT') then
     insert into activities (type, message, mine_id, user_name, priority)
     values ('incident', 'New incident reported: ' || new.title, new.mine_id, new.reported_by,
-            case new.severity when 'critical' then 'critical' when 'high' then 'high' when 'medium' then 'medium' else 'low' end);
+            (case new.severity when 'critical' then 'critical' when 'high' then 'high' when 'medium' then 'medium' else 'low' end)::compliance_priority);
   elsif (tg_op = 'UPDATE' and old.status is distinct from new.status) then
     insert into activities (type, message, mine_id, user_name)
     values ('incident', new.title || ' status changed to ' || new.status, new.mine_id, 'System');
