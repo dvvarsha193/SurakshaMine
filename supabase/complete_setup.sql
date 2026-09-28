@@ -1,3 +1,13 @@
+-- ============================================================
+-- RESET PUBLIC SCHEMA (Ensures clean run with zero collisions)
+-- ============================================================
+drop schema if exists public cascade;
+create schema public;
+grant all on schema public to postgres;
+grant all on schema public to public;
+grant all on schema public to anon;
+grant all on schema public to authenticated;
+grant all on schema public to service_role;
 
 
 -- ============================================================
@@ -550,4 +560,5 @@ join mines m on m.name = v.mine_name;
 -- automatically by the handle_new_user() trigger on signup. See
 -- supabase/create-demo-users.md for the exact steps.
 -- ------------------------------------------------------------
+
 
